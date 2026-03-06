@@ -1,59 +1,264 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Contact Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple contact management system built with Laravel.
+The project was developed to practice modern Laravel development concepts including authentication, CRUD operations, PostgreSQL integration, DataTables server-side processing, and structured version control.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Project Description
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This application allows authenticated users to manage their personal contacts.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Each user can create, view, edit and delete their own contacts while ensuring that users cannot access data belonging to others.
 
-## Learning Laravel
+The system demonstrates a complete development workflow using Laravel, Blade, Bootstrap, TypeScript and PostgreSQL.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Technologies Used
 
-## Laravel Sponsors
+Backend
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* PHP 8.2+
+* Laravel (latest stable version)
+* PostgreSQL
+* Eloquent ORM
 
-### Premium Partners
+Frontend
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+* Blade Templates
+* Bootstrap 5
+* TypeScript
+* Vite
+* DataTables
 
-## Contributing
+Infrastructure
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Nginx
+* Local development environment
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Features
 
-## Security Vulnerabilities
+* User authentication (register, login, logout)
+* Protected routes using Laravel `auth` middleware
+* Dashboard for authenticated users
+* Full CRUD for contacts
+* Contacts associated with authenticated users
+* Server-side DataTables integration
+* Pagination, search and sorting
+* Phone mask implemented with TypeScript
+* Soft Deletes for contacts
+* Validation using Form Requests
+* Database seeders with example data
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+# Database Structure
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Table: contacts
+
+Columns
+
+* id
+* user_id (foreign key)
+* name
+* nickname (nullable)
+* phone
+* notes (nullable)
+* deleted_at (soft delete)
+* created_at
+* updated_at
+
+Relationships
+
+* User **has many** Contacts
+* Contact **belongs to** User
+
+---
+
+# Requirements
+
+Before running the project make sure you have installed:
+
+* PHP 8.2+
+* Composer
+* Node.js and NPM
+* PostgreSQL
+* Nginx
+
+---
+
+# Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/contact-system.git
+cd contact-system
+```
+
+Install backend dependencies
+
+```bash
+composer install
+```
+
+Install frontend dependencies
+
+```bash
+npm install
+```
+
+Copy environment file
+
+```bash
+cp .env.example .env
+```
+
+Generate application key
+
+```bash
+php artisan key:generate
+```
+
+---
+
+# Database Configuration
+
+Create a PostgreSQL database and update the `.env` file.
+
+Example configuration:
+
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=contact_system
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+```
+
+Run migrations
+
+```
+php artisan migrate
+```
+
+(Optional) Run seeders
+
+```
+php artisan db:seed
+```
+
+---
+
+# Frontend Build
+
+Run the development server for frontend assets
+
+```
+npm run dev
+```
+
+For production build
+
+```
+npm run build
+```
+
+---
+
+# Web Server Configuration
+
+The application is served using **Nginx**.
+
+The virtual host must point to the **public directory**.
+
+Example local domain:
+
+```
+http://contacts.localhost
+```
+
+---
+
+# Contacts Module
+
+Authenticated users can:
+
+* Create contacts
+* View contact details
+* Edit contacts
+* Delete contacts (Soft Delete)
+
+Important rules:
+
+* Each contact belongs to an authenticated user
+* Users can only access their own contacts
+* Deleted contacts are hidden from the default listing
+
+---
+
+# Project Structure Overview
+
+Important directories:
+
+```
+app/
+  Models/
+  Http/
+    Controllers/
+    Requests/
+
+database/
+  migrations/
+  seeders/
+
+resources/
+  views/
+  ts/
+
+routes/
+  web.php
+```
+
+---
+
+# Version Control
+
+The project uses Git with a branch-based workflow.
+
+Main branches
+
+```
+main
+develop
+feature/*
+```
+
+Example feature branches
+
+```
+feature/project-setup
+feature/authentication
+feature/base-layout
+feature/contacts-crud
+feature/datatables
+```
+
+Commit examples
+
+```
+feat: implement contacts CRUD
+fix: correct contact validation
+chore: configure project environment
+docs: update README
+```
+
+---
+
+# License
+
+This project was developed for learning and evaluation purposes.
